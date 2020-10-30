@@ -1,0 +1,2 @@
+# JAVA_ThirteenWater_Analysis
+一个用java写的关于棋牌游戏十三水的牌型分析，个人研究，写的比较陋，只是单纯的实现而已，欢迎大家交流
