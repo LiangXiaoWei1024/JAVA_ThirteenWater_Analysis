@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Ê®ÈıË®ÅÆĞÍ»ñÈ¡¹¤¾ß
+ * åä¸‰æ°´ç‰Œå‹è·å–å·¥å…·
  * @author lxw
  *
  */
@@ -58,7 +58,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞ¶Ô×Ó×éºÏ
+	 * è·å–æ‰€æœ‰å¯¹å­ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 		for (int i = 0; i < arr.size(); i++) {
 			int a = arr.get(i).getDeck();
 			for (int j = 0; j < arr.size(); j++) {
-				int b = arr.get(j).getDeck();;
+				int b = arr.get(j).getDeck();
 				if(i == j){
 					continue;
 				}
@@ -75,8 +75,17 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 					List<Poker> aa = new ArrayList<Poker>();
 					aa.add(arr.get(i));
 					aa.add(arr.get(j));
-					result.add(aa);
-					break;
+					boolean ab = false;
+					for (int k = 0; k < result.size(); k++) {
+						Poker p1 = result.get(k).get(0);
+						Poker p2 = result.get(k).get(1);
+						if((p1 == arr.get(j) && p2 == arr.get(i)) || (p2 == arr.get(i) && p1 == arr.get(j))){
+							ab = true;	
+						}
+					}
+					if(!ab){
+						result.add(aa);
+					}
 				}
 			}
 		}
@@ -84,7 +93,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞÁ½¶Ô×éºÏ
+	 * è·å–æ‰€æœ‰ä¸¤å¯¹ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -141,7 +150,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞÈıÌõ×éºÏ
+	 * è·å–æ‰€æœ‰ä¸‰æ¡ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -179,7 +188,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞµÄË³×Ó×éºÏ
+	 * è·å–æ‰€æœ‰çš„é¡ºå­ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -189,7 +198,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 		List<Poker> list = new ArrayList<Poker>();
 		List<Poker> copylist = copyPokerList(arr);
 
-		//A==13,¿ÉÒÔ×é³É12345 & 10JQKA,·½±ã¼ÆËãÌí¼ÓÒ»¸öA=0
+		//A==13,å¯ä»¥ç»„æˆ12345 & 10JQKA,æ–¹ä¾¿è®¡ç®—æ·»åŠ ä¸€ä¸ªA=0
 		for (int j = 0; j < arr.size(); j++) {
 			if(arr.get(j).getDeck() == 13){
 				Poker poker = new Poker();
@@ -198,7 +207,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 				copylist.add(poker);
 			}
 		}
-		//ÅÅĞò
+		//æ’åº
 		sort(copylist);
 		
 		for (int i = 0; i < copylist.size(); i++) {
@@ -262,7 +271,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞµÄÍ¬»¨×éºÏ
+	 * è·å–æ‰€æœ‰çš„åŒèŠ±ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -364,7 +373,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	
 	
 	/**
-	 * »ñÈ¡ËùÓĞµÄºùÂ«×éºÏ
+	 * è·å–æ‰€æœ‰çš„è‘«èŠ¦ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -405,7 +414,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞµÄÌúÖ§×éºÏ
+	 * è·å–æ‰€æœ‰çš„é“æ”¯ç»„åˆ
 	 * @param arr
 	 * @return
 	 */
@@ -454,7 +463,7 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞÍ¬»¨Ë³×éºÏ
+	 * è·å–æ‰€æœ‰åŒèŠ±é¡ºç»„åˆ
 	 * @param arr
 	 * @return
 	 */
