@@ -195,6 +195,8 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 	public static List<List<Poker>> getStraight(List<Poker> arr){
 		List<List<Poker>> result = new ArrayList<List<Poker>>();
 		Map<Integer,Poker> notRepeatingMap = new HashMap<Integer, Poker>();
+		Map<Integer,List<Poker>> map = new HashMap<>();
+
 		List<Poker> list = new ArrayList<Poker>();
 		List<Poker> copylist = copyPokerList(arr);
 
@@ -218,6 +220,30 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 			}
 
 			if(Math.abs(poker-upPoker) == 1 || notRepeatingMap.size() < 1 || Math.abs(poker-upPoker) == 0){
+				if(Math.abs(poker-upPoker) == 0){
+					List<Poker> ac = map.get(poker);
+					boolean g = false;
+					boolean gg = false;
+
+					if(ac == null){
+						ac = new ArrayList<>();
+					}
+					for (Poker poker2 : ac) {
+						if(poker2.equals(copylist.get(i))){
+							g = true;
+						}
+						if(poker2.equals(notRepeatingMap.get(notRepeatingMap.keySet().toArray()[notRepeatingMap.keySet().toArray().length-1]))){
+							gg = true;
+						}
+					}
+					if(!g){
+						ac.add(copylist.get(i));
+					}
+					if(!gg){
+						ac.add(notRepeatingMap.get(notRepeatingMap.keySet().toArray()[notRepeatingMap.keySet().toArray().length-1]));
+					}
+					map.put(poker, ac);
+				}
 				notRepeatingMap.put(poker, copylist.get(i));
 			}else{
 				if(notRepeatingMap.size() > 0){
@@ -257,6 +283,34 @@ public class ThirteenWaterCardAnalysisUtils extends ThirteenWaterSizeComparison 
 			if(containStraight(aa)){
 				result.add(aa);
 			}
+		}
+		
+		
+		List<List<Poker>> result1 = new ArrayList<List<Poker>>();
+
+		
+		for (int i = 0; i < result.size(); i++) {
+			for (int j = 0; j < result.get(i).size(); j++) {
+				List<Poker> list1 = map.get(result.get(i).get(j).getDeck());
+				if(list1 != null){
+					for (Poker poker2 : list1) {
+						if(poker2.getDecor() == result.get(i).get(j).getDecor()){
+							continue;
+						}
+						List<Poker> p1 = copyPokerList(result.get(i));
+						for (Poker poker3 : p1) {
+							if(poker3.getDeck() == poker2.getDeck()){
+								poker3.setDecor(poker2.getDecor());
+								break;
+							}
+						}
+						result1.add(p1);
+					}
+				}
+			}
+		}
+		for (List<Poker> list2 : result1) {
+			result.add(list2);
 		}
 		
 		for (int i = 0; i < result.size(); i++) {
